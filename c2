@@ -1,0 +1,145 @@
+// Interface phương tiện di chuyển
+interface PhuongTienDiChuyen {
+    void batDau();
+    void TangToc();
+    void DungLai();
+    double LayVanToc();
+    String LayTenHangSanXuat();
+}
+
+// Lớp trừu tượng Phương tiện di chuyển
+abstract class PhuongTienDiChuyenAbstract implements PhuongTienDiChuyen {
+    protected String HangSanXuat;
+    protected String TenHangSanXuat;
+    protected String TenQuocGia;
+
+    public PhuongTienDiChuyenAbstract(String HangSanXuat, String TenHangSanXuat, String TenQuocGia) {
+        this.HangSanXuat = HangSanXuat;
+        this.TenHangSanXuat = TenHangSanXuat;
+        this.TenQuocGia = TenQuocGia;
+    }
+
+    @Override
+    public String LayTenHangSanXuat() {
+        return this.TenHangSanXuat;
+    }
+}
+
+// Lớp Máy bay
+class MayBay extends PhuongTienDiChuyenAbstract {
+    private String LoaiNhienLieu;
+
+    public MayBay(String HangSanXuat, String TenHangSanXuat, String TenQuocGia, String LoaiNhienLieu) {
+        super(HangSanXuat, TenHangSanXuat, TenQuocGia);
+        this.LoaiNhienLieu = LoaiNhienLieu;
+    }
+
+    public void catCanh() {
+        System.out.println("Máy bay đang cất cánh.");
+    }
+
+    public void HaCanh() {
+        System.out.println("Máy bay đang hạ cánh.");
+    }
+
+    @Override
+    public void batDau() {
+        System.out.println("Máy bay đang khởi động động cơ.");
+    }
+
+    @Override
+    public void TangToc() {
+        System.out.println("Máy bay đang tăng tốc.");
+    }
+
+    @Override
+    public void DungLai() {
+        System.out.println("Máy bay đang giảm tốc và dừng lại.");
+    }
+
+    @Override
+    public double LayVanToc() {
+        return 800.0; // Giả sử tốc độ là 800 km/h
+    }
+}
+
+// Lớp Xe ô tô
+class XeOto extends PhuongTienDiChuyenAbstract {
+    private String LoaiNhienLieu;
+
+    public XeOto(String HangSanXuat, String TenHangSanXuat, String TenQuocGia, String LoaiNhienLieu) {
+        super(HangSanXuat, TenHangSanXuat, TenQuocGia);
+        this.LoaiNhienLieu = LoaiNhienLieu;
+    }
+
+    @Override
+    public void batDau() {
+        System.out.println("Xe ô tô đang khởi động động cơ.");
+    }
+
+    @Override
+    public void TangToc() {
+        System.out.println("Xe ô tô đang tăng tốc.");
+    }
+
+    @Override
+    public void DungLai() {
+        System.out.println("Xe ô tô đang giảm tốc và dừng lại");
+    }
+    @Override
+    public double LayVanToc() {
+        return 120.0; // Giả sử tốc độ là 120 km/h
+    }
+}
+
+// Lớp Xe đạp
+class XeDap implements PhuongTienDiChuyen {
+@Override
+public void batDau() {
+System.out.println("Xe đạp đang được đạp để di chuyển.");
+}
+@Override
+public void TangToc() {
+    System.out.println("Xe đạp đang được đạp nhanh hơn.");
+}
+
+@Override
+public void DungLai() {
+    System.out.println("Xe đạp đang giảm tốc và dừng lại.");
+}
+
+@Override
+public double LayVanToc() {
+    return 20.0; // Giả sử tốc độ là 20 km/h
+}
+
+@Override
+public String LayTenHangSanXuat() {
+    return "Không có"; // Không có hãng sản xuất cho xe đạp
+}
+}
+
+// Lớp chạy thử chương trình
+public class Main {
+public static void main(String[] args) {
+PhuongTienDiChuyen mayBay = new MayBay("Boeing", "Boeing 777", "Mỹ", "Jet Fuel");
+PhuongTienDiChuyen xeOto = new XeOto("Toyota", "Toyota Camry", "Nhật Bản", "Xăng");
+PhuongTienDiChuyen xeDap = new XeDap();
+mayBay.batDau();
+mayBay.TangToc();
+System.out.println("Tốc độ máy bay: " + mayBay.LayVanToc() + " km/h");
+
+xeOto.batDau();
+xeOto.TangToc();
+System.out.println("Tốc độ xe ô tô: " + xeOto.LayVanToc() + " km/h");
+
+xeDap.batDau();
+xeDap.TangToc();
+System.out.println("Tốc độ xe đạp: " + xeDap.LayVanToc() + " km/h");
+}
+}
+
+
+
+
+
